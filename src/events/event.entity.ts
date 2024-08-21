@@ -24,4 +24,10 @@ export class Event {
         cascade: ['insert', 'update'],
     })
     attendees: Attendee[];
+
+    // 不需要加上@Column()因為不會被存到資料庫
+    attendeesCount?: number;
+    attendeeRejected?: number;
+    attendeeMaybe?: number;
+    attendeeAccepted?: number;
 }
