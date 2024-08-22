@@ -110,7 +110,7 @@ export class EventsService {
             },
         );
 
-        this.logger.debug(query.getSql());
+        // this.logger.debug(query.getSql());
 
         return await query.getOne();
     }
