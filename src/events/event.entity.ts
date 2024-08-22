@@ -50,7 +50,7 @@ export class Event {
 
     // 不需要加上@Column()因為不會被存到資料庫
     @Expose()
-    attendeesCount?: number;
+    attendeeCount?: number;
     @Expose()
     attendeeRejected?: number;
     @Expose()

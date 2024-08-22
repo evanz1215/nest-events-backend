@@ -7,10 +7,11 @@ export interface PaginateOptions {
     total?: boolean;
 }
 
-export class PaginateResult<T> {
-    constructor(partial: Partial<PaginateResult<T>>) {
+export class PaginationResult<T> {
+    constructor(partial: Partial<PaginationResult<T>>) {
         Object.assign(this, partial);
     }
+
     @Expose()
     first: number;
     @Expose()
@@ -29,11 +30,11 @@ export async function paginate<T>(
         limit: 10,
         currentPage: 1,
     },
-): Promise<PaginateResult<T>> {
+): Promise<PaginationResult<T>> {
     const offset = (options.currentPage - 1) * options.limit;
     const data = await qb.limit(options.limit).offset(offset).getMany();
 
-    return new PaginateResult<T>({
+    return new PaginationResult({
         first: offset + 1,
         last: offset + data.length,
         limit: options.limit,

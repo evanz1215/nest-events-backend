@@ -39,18 +39,15 @@ export class EventsController {
     @UsePipes(new ValidationPipe({ transform: true }))
     @UseInterceptors(ClassSerializerInterceptor)
     async findAll(@Query() filter: ListEvents) {
-        // this.logger.debug(filter);
-        this.logger.log(`Hit the findAll route`);
         const events =
             await this.eventsService.getEventsWithAttendeeCountFilteredPaginated(
                 filter,
                 {
                     total: true,
                     currentPage: filter.page,
-                    limit: 10,
+                    limit: 5,
                 },
             );
-
         return events;
     }
 

@@ -57,7 +57,7 @@ export class EventsService {
     }
 
     private async getEventsWithAttendeeCountFiltered(filter?: ListEvents) {
-        let query = this.getEventsBaseQuery();
+        let query = this.getEventsWithAttendeeCountQuery();
 
         if (!filter) {
             return query;
@@ -66,13 +66,13 @@ export class EventsService {
         if (filter.when) {
             if (filter.when == WhenEventFilter.Today) {
                 query = query.andWhere(
-                    'e.when >= CURDATE() AND e.when <= CURDATE() + INTERVAL 1 DAY',
+                    `e.when >= CURDATE() AND e.when <= CURDATE() + INTERVAL 1 DAY`,
                 );
             }
 
             if (filter.when == WhenEventFilter.Tomorrow) {
                 query = query.andWhere(
-                    'e.when >= CURDATE() + INTERVAL 1 DAY AND e.when <= CURDATE() + INTERVAL 2 DAY',
+                    `e.when >= CURDATE() + INTERVAL 1 DAY AND e.when <= CURDATE() + INTERVAL 2 DAY`,
                 );
             }
 
@@ -109,8 +109,6 @@ export class EventsService {
                 id,
             },
         );
-
-        // this.logger.debug(query.getSql());
 
         return await query.getOne();
     }
